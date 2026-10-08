@@ -10,7 +10,6 @@ import org.hamcrest.Matchers.allOf
 import com.example.design_system.R as DsR
 
 class ConversationPage {
-    val titleView = withId(DsR.id.chatNameTextView)
     val messageInput = allOf(
         withId(DsR.id.inputEditText),
         isDescendantOfA(withId(R.id.messageInput))

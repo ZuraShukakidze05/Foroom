@@ -19,10 +19,6 @@ import org.hamcrest.Matcher
 
 class ConversationSteps(private val page: ConversationPage = ConversationPage()) {
 
-    fun verifyConversationOpen(title: String) = apply {
-        waitUntil { onView(page.titleView).check(matches(androidx.test.espresso.matcher.ViewMatchers.withText(title))) }
-    }
-
     fun typeMessage(text: String) = apply {
         waitUntil { onView(page.messageInput).perform(replaceText(text), closeSoftKeyboard()) }
     }
@@ -48,10 +44,6 @@ class ConversationSteps(private val page: ConversationPage = ConversationPage())
 
     fun isMessageVisibleWithin(text: String, timeoutMs: Long = Constants.SHORT_TIMEOUT_MS): Boolean =
         waitUntilOrFalse(timeoutMs) { assertMessageNow(text) }
-
-    fun verifyMessageNotVisible(text: String) = apply {
-        check(!isMessageVisible(text)) { "Message '$text' is visible without scrolling" }
-    }
 
     fun verifyMessageFrom(text: String, sender: String) = apply {
         waitUntil {
@@ -89,11 +81,6 @@ class ConversationSteps(private val page: ConversationPage = ConversationPage())
         tapSend()
         verifyMessage(text)
     }
-
-    fun sendManyMessages(prefix: String, count: Int) = apply {
-        repeat(count) { sendMessage("$prefix-${it + 1}") }
-    }
-
 
     fun swipeToMessage(text: String, maxSwipes: Int = Constants.MAX_SWIPES) = apply {
         var swipes = 0

@@ -57,11 +57,6 @@ class LoginSteps(private val page: LoginPage = LoginPage()) {
         tapLogIn()
     }
 
-    fun signInAs(user: String, password: String) = apply {
-        loginWith(user, password)
-        verifyHomeDisplayed()
-    }
-
     fun waitForLoginOrHome() = apply {
         waitUntil(Constants.DEFAULT_TIMEOUT_MS) {
             if (!isLoginDisplayed() && !isHomeDisplayed()) {
